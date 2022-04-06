@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'includes/alerts.html'%}
+<style>
+    .button-dismiss {
+        background: none;
+        padding: 0px;
+        border: none;
+      }
+</style>
+<div class="row">
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-5 mt-3">
+        {% for post in post %}
+        <div class="card mt-4 mb-5">
+            <div class="avatar-home">
+                <div class="image-profile">
+                    <img src="{{post.host.avatar.url}}" alt="profile picture" class="rounded-circle" style="height: 70px;width:70px;border-radius: 50%">
+                </div>
+                <div class="username" style="margin-bottom: -0.9rem;">
+                    <p><a href="{% url 'profile' post.host.id %}" style="text-decoration: none;">{{post.host.username}}</a></p>
+                </div>
+            </div>
+            <hr>
+            <img src="{{post.image.url}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <span><form action="{% url 'like' %}" method="POST">
+                    {% csrf_token %}
+                   <span style="font-weight: bold;">{{post.liked.all.count}} </span> 
+                    <input type="hidden" name="post" id="post" value="{{post.id}}">
+                    {% if request.user not in post.liked.all %}
+                    <button type="submit" class="button-dismiss">
+                        <i class="fa fa-heart btn" style="font-size:20px"></i>
+                    </button>
+                    {% else %}
+                    <button type="submit" class="button-dismiss">
+                        <i class="fa fa-heart btn" style="font-size: 20px; color:red"></i>
+                    </button>
+                    {% endif %}
+                </form> </span> 
+                <i class="fa-solid fa-comment-dots"></i>
+                <p class="card-text">{{post.description}}</p>
+            </div>
+
+            <div class="collapse" id="comments-{{post.id}}">
+                <div class="card-body" id="comments-expanded-{{post.id}}"
+                    style="padding-left: 20px;padding-right: 15px;padding-top: 5px;">
+                    <h5>COMMENTS</h5>
+                    {% for comment in post.comments.all %}
+                    <div class="comments avatar-home d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-start">
+                            <div class="image-profile ms-2">
+                                <img src="{{comment.user.avatar.url}}" alt="profile picture" class="rounded-circle" style="height: 30px;width:30px;border-radius: 50%">
+                            </div>
+                            <div class="username ms-2">
+                                <p>@:<a href="{% url 'profile' comment.user.id %}">{{comment.user.username}}</a></p>
+                            </div>
+                            <div class="post ms-1">
+                                <p>{{comment.body}}</p>
+                            </div>
+                        </div>
+                        <div class="time_posted">
+                            <small class="text-muted"> Posted {{comment.date_posted|timesince}} ago</small>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+
+            <p class="card-text" style="margin-left: 0.7rem;">
+                {% if post.comments.all.count > 0%}
+                    <a href="#comments-{{post.id}}" role="button" data-bs-toggle="collapse">
+                        <button class="btn  btn-outline-secondary btn-sm ">View {{post.comments.all.count}} Comments</button>
+                    </a>
+                {% else %}
+                    <small class="text-muted">No comments</small>
+                {% endif %}
+            </p>
+            <div class="form">
+                <form action="{% url 'comments' post.id %}" method="POST"
+                    style="padding-left: 20px;padding-right: 15px;padding-top: 5px; margin-bottom: 0.5rem">
+                    {% csrf_token %}
+                    <input type="text" name="comment" id="comment" class="form-control "
+                        placeholder="Add a comment..." />
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+    <div class="col-md-3 mt-5">
+        <div class="card" style="width: 18rem;">
+            <div class="card-header">
+              Suggested for you
+            </div>
+            {% for user in user %}
+            <ul class="list-group">
+                {% if request.user.id != user.id %} <li class="list-group-item">@ <a href="{% url 'profile' user.id%}" style="text-decoration: none;">{{user.username}}</a> <span><a  href="{% url 'profile' user.id%}" class="btn btn-primary btn-sm float-end">Follow</a></span></li>{% endif %}
+            </ul>
+            {% endfor %}
+          </div>
+    </div>
+</div>
+
+{% endblock %}

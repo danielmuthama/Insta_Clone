@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card form-card-post mt-5" style="max-width: 800px;  margin:auto; padding: 40px">
+            <div class="card-body">
+                <h4 class="text-center m-4">CREATE NEW POST</h4>
+                <form action="" method="POST" enctype="multipart/form-data" style="max-width: 650px; margin:auto">
+                    {% csrf_token %}
+                    <div class="form-group mt-3 m-4">
+                        <input type="file" src="" alt="" class="form-control" name="image">
+                    </div>
+                    <div class="form-group mt-3 m-4">
+                        <input type="text" name="description" id="" placeholder="Add Caption..." class="form-control" >
+                    </div>
+                    <div class="form-group mt-3 d-grid">
+                        <button type="submit" class="btn btn-primary btn-block">Post</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock%}

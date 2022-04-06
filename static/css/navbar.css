@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Calligraffitti&display=swap");
+
+#navbar {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+#navbarUl {
+  margin-left: 5rem;
+  color: red !important;
+}
+.instagram-1{
+    font-family: "Calligraffitti", cursive;
+    font-weight: bold;
+    font-size: 1.5;
+}
+.instagram {
+  font-family: "Calligraffitti", cursive;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+/* login / register styles */
+.form-card {
+  max-width: 350px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 3rem;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.form-input {
+  max-width: 270px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.btn-block {
+  margin-left: auto;
+  margin-right: auto;
+  width: 270px;
+}
+.list-group-flush {
+  margin-right: auto;
+  margin-left: auto;
+  border: 1px solid lightgrey;
+  max-width: 350px;
+  margin-top: 0.9rem;
+}
+.list-group-item {
+  margin: 1rem;
+}
+/* end styles */
+
+/* landing page styles  */
+.avatar-home {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.4rem;
+
+}
+/* .rounded-circle {
+  height: 130px;
+  width: 130px;
+} */
+.username {
+  margin-left: 0.5rem;
+}
+/* end of landing page */
+
+/* profile page styling */
+
+.avatar-image {
+  height: 120px;
+  width: 120px;
+}
+
+/* edit profile styles */
+.form__group {
+  margin-bottom: 2rem;
+}
+.form__group input {
+  background-color: transparent;
+}
+.button-dismiss {
+  background: none;
+  padding: 0px;
+  border: none;
+}
